@@ -1,17 +1,19 @@
 'use strict'
-const io = require('socket.io-client')
 module.exports = class SocketWrapper{
   constructor(options = {}){
+    this.io = require('socket.io-client')
     this.socketOptions = { transports: ['websocket'] }
     if(options.socketOptions) this.socketOptions = { ...this.socketOptions, ...options.socketOptions }
+
     this.uri = options.uri
     this.podName = options.podName
     this.identify = options.identify
     this.serverType = options.serverType || ''
-    this.timeout = options.timeout || 10000
     this.cmdProcessor = options.cmdProcessor
+    this.timeout = options.timeout || 10000
+    
     this.connectNotify = true, this.socketReady = false
-    this.socket = io(this.uri, this.socketOptions)
+    this.socket = this.io(this.uri, this.socketOptions)
     this.socket.on('connect', ()=>{
       this.socketReady = true
       if(this.connectNotify){
