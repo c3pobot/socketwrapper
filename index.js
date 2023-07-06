@@ -35,7 +35,7 @@ module.exports = class SocketWrapper{
   call(cmd, obj){
     return new Promise((resolve, reject)=>{
       try{
-        if(!this.socket) reject('Socket Error: '+this.serverType+' connection not available')
+        if(!this.socket || !this.socket.connected) reject('Socket Error: '+this.serverType+' connection not available')
         this.socket.timeout(this.timeout).emit('request', cmd, obj, (err, res)=>{
           if(err) reject(`${this.serverType} Socket Error: ${err.message || err}`);
           resolve(res)
