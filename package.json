@@ -1,0 +1,14 @@
+{
+  "name": "socketwrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "scuba75",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io-client": "^4.7.1"
+  }
+}
